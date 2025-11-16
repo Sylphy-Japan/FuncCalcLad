@@ -1,6 +1,6 @@
 ﻿namespace FuncCalcLab.Immutable
 {
-    public class Class1
+    public class ImmutableRpnCalculator
     {
 
     }
