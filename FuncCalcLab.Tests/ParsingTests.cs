@@ -21,4 +21,35 @@ namespace FuncCalcLab.Tests
             Assert.Equal(expected, tokens);
         }
     }
+
+
+    public class RpnTests
+    {
+        [Fact]
+        public void ToRpn_Simple()
+        {
+            var tokens = ExpressionPipeline.Tokenize("1 + 2 * 3");
+            var rpn = ExpressionPipeline.ToRpn(tokens);
+
+            Assert.Equal(new[] { "1", "2", "3", "*", "+" }, rpn);
+        }
+
+        [Fact]
+        public void ToRpn_WithParentheses()
+        {
+            var tokens = ExpressionPipeline.Tokenize("(1 + 2) * 3");
+            var rpn = ExpressionPipeline.ToRpn(tokens);
+
+            Assert.Equal(new[] { "1", "2", "+", "3", "*" }, rpn);
+        }
+
+        [Fact]
+        public void ToRpn_WithFunctions()
+        {
+            var tokens = ExpressionPipeline.Tokenize("sin(0.5) + cos(1)");
+            var rpn = ExpressionPipeline.ToRpn(tokens);
+
+            Assert.Equal(new[] { "0.5", "sin", "1", "cos", "+" }, rpn);
+        }
+    }
 }
